@@ -17,10 +17,9 @@ python3Packages.buildPythonApplication {
   nativeCheckInputs = [ python3Packages.pytestCheckHook ];
 
   meta = {
-    description = "A example python project using nix";
-    homepage = "https://github.com/";
-    license = lib.licenses.mit;
+    description = "A report, code, an animation for the Edmonds-Karp Algorithm";
+    homepage = "https://github.com/pixel-87/edmonds-karp";
+    license = lib.licenses.gpl3Plus;
     maintainers = with lib.maintainers; [ ];
-    mainProgram = "example";
   };
 }
