@@ -16,7 +16,7 @@
     in
     {
       devShells = forAllSystems (pkgs: {
-        default = pkgs.callPackage ./shell.nix { inherit pkgs; };
+        default = pkgs.callPackage ./nix/shell.nix { inherit pkgs; };
       });
     };
 }

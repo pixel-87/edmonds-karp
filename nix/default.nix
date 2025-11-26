@@ -3,7 +3,7 @@ python3Packages.buildPythonApplication {
   pname = "example-python";
   version = "0.0.1";
 
-  src = ./.;
+  src = ../.;
 
   # If you are using poetry, you can use the following configuration
   # pyproject = true;
