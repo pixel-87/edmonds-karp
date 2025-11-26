@@ -8,7 +8,7 @@ class EdmondsKarpGraph:
         :param size: The number of vertices in the graph
         """
         self.size = size
-        self.adj_matrix = [[0] * size for _ in range(size)]
+        self.adj_matrix = [[0] * size for _ in range(size)] # Adjacency matrix for capacities
         self.vertex_labels = [''] * size
 
     def add_edge(self, u: int, v: int, capacity: int) -> None:
@@ -27,7 +27,7 @@ class EdmondsKarpGraph:
         Set a label for a vertex (e.g., 'S', 'T', 'U').
         
         :param vertex: The vertex index
-        :param label: The label string for the vertex
+        :param label: The label for the vertex
         """
         if 0 <= vertex < self.size:
             self.vertex_labels[vertex] = label
@@ -43,13 +43,14 @@ class EdmondsKarpGraph:
         :return: True if a path exists, False otherwise
         """
         visited = [False] * self.size
-        queue = deque([s])
+        queue = deque([s]) # Initialize queue with source vertex s
         visited[s] = True
 
         while queue:
             u = queue.popleft()
 
             for v in range(self.size):
+                # If not visited and there's remaining capacity on the edge from u to v
                 if not visited[v] and self.adj_matrix[u][v] > 0:
                     queue.append(v)
                     visited[v] = True
@@ -58,3 +59,5 @@ class EdmondsKarpGraph:
                     if v == t:
                         return True
         return False
+    
+    
