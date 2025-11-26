@@ -61,6 +61,13 @@ class EdmondsKarpGraph:
         return False
     
     def edmonds_karp(self, source: int, sink: int) -> int:
+        """
+        Compute the maximum flow from source to sink using the Edmonds-Karp algorithm.
+        
+        :param source: Source vertex index
+        :param sink: Sink/target vertex index
+        :return: The value of the maximum flow
+        """
         parent = [-1] * self.size # parent array stores the path
         max_flow = 0
 
@@ -68,7 +75,8 @@ class EdmondsKarpGraph:
         while self.bfs(source, sink, parent):
 
             # Find the bottle neck capacity of the found path, the minimum residual capacity    
-            path_flow = float('Inf')
+            # use a large integer sentinel to keep path_flow an int (avoids float assignment to matrix)
+            path_flow = 10**18
             s = sink
 
             while s != source:
@@ -80,13 +88,13 @@ class EdmondsKarpGraph:
             while v != source:
                 u = parent[v]
                 # Decrease the capacity of the forward edge by path_flow
-                self.adj_matrix[u][v] -= path_flow
+                self.adj_matrix[u][v] -= int(path_flow)
                 # Increase the capacity of the backward edge by path_flow
-                self.adj_matrix[v][u] += path_flow
+                self.adj_matrix[v][u] += int(path_flow)
 
                 v = parent[v]
 
-            path = []
+            path: list[int] = []
             v = sink
             while v != source:
                 path.append(v)
