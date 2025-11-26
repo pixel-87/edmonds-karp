@@ -60,4 +60,42 @@ class EdmondsKarpGraph:
                         return True
         return False
     
-    
+    def edmonds_karp(self, source: int, sink: int) -> int:
+        parent = [-1] * self.size # parent array stores the path
+        max_flow = 0
+
+        
+        while self.bfs(source, sink, parent):
+
+            # Find the bottle neck capacity of the found path, the minimum residual capacity    
+            path_flow = float('Inf')
+            s = sink
+
+            while s != source:
+                path_flow = min(path_flow, self.adj_matrix[parent[s]][s])
+                s = parent[s]
+
+            max_flow += path_flow
+            v = sink
+            while v != source:
+                u = parent[v]
+                # Decrease the capacity of the forward edge by path_flow
+                self.adj_matrix[u][v] -= path_flow
+                # Increase the capacity of the backward edge by path_flow
+                self.adj_matrix[v][u] += path_flow
+
+                v = parent[v]
+
+            path = []
+            v = sink
+            while v != source:
+                path.append(v)
+                v = parent[v]
+            path.append(source)
+            path.reverse()
+
+            path_names = [self.vertex_labels[i] for i in path]
+            print(f"Augmenting path found: {' -> '.join(path_names)} with flow {path_flow}")
+        
+        return max_flow  
+
