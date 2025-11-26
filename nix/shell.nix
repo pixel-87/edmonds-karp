@@ -7,6 +7,7 @@ mkShell {
   packages = with pkgs; [
     python3
     uv
+    python3Packages.pytest
     
     # System dependencies for Manim
     ffmpeg
