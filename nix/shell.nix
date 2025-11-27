@@ -8,12 +8,16 @@ mkShell {
     python3
     uv
     python3Packages.pytest
+    python313Packages.markitdown
     
     # System dependencies for Manim
     ffmpeg
     cairo
     pango
     pkg-config
+    
+    # LaTeX for Manim text rendering
+    texlive.combined.scheme-full
     
     # Build tools
     ninja

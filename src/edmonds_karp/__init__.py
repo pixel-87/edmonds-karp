@@ -1,1 +1,1 @@
-from .algorithm import max_flow
+from .edmonds_karp import EdmondsKarpGraph
